@@ -1,23 +1,28 @@
-﻿0.首要条件
-	所有操作请在root用户下进行，否则无法混杂模式抓取数据包
-1.执行步骤
-	step1：配置文件->installPcap.sh（终端模式下执行,数据库密码为1）
-	验证方法，进入Mysql数据库，看是否有如相关数据库(dbPcap->text)。
-	step2：执行文件->双击pcap_main.py(root用户下)
-2.使用说明
-	2.1 “规则表达式过滤”条目，主要写端口，主机，协议过滤条件，同wireshark过滤语法相同；
-	2.2 "数据库查询->关键字"条目，写应用数据段的正则表达式，类似于sql语句的like，显示字符为ASCII或16进制（同wireshark相同）
-	2.3 installPcap.sh 请在终端选择gb2312编码格式，否则中文乱码，但不影响使用。
-3.基本功能
-“网络直接获取”
-网卡输入：eth0，此处的名称为linux终端下输入ifconfig  后实际物理网卡的名称，不同系统不一样。
-规则表达式：功能上过滤协议、端口及其组合，具体写法同wireshark过滤规则相同。
-仅监听数据：当填写好网口和规则表达式后，点击“仅监听数据”，过滤后的数据会以500W个包作为一个单元，保存在pcap_file文件夹下。如果想要调整保存包得数量，可以修改pcap_main.py文件中TCPDUMPNUM变量大小。
-“本地文件选择”
-首先点击“选择文件”，弹出Find Files窗口,填写过滤规则“*.pcap|*.p|*.cap”和选择目录，然后点击Find按钮，在列表中左键点击选择文件后，点击“Saved”按钮，保存记录。
-如果成功选中了文件，在“本地文件选择”的调试窗口中，显示类似“选定 X个文件，等待选择处理”字样，表示成功选中文件。
-“清除选择”则对选中文件清空，重新选择。
-选中文件并填写好过滤规则后，点击“过滤并存储到数据库”按钮。
-“数据库查询”
-首先，连接数据库，初始情况没有数据，但是能显示表头。
-“关键字”即为用户字段的过滤，支持正则表达式输入。
+0. Prerequisites
+	All operations should be done under the root user, otherwise the data can not be fetched
+
+1. Perform the steps
+	Step1: configuration file -> installPcap.sh (terminal mode, the database password is 1)
+	Verify the method, enter the Mysql database to see if the relevant database (dbPcap-> text).
+	Step2: Execute file -> double click pcap_main.py (root user)
+
+2. Instructions for use
+	2.1 "rule expression filter" entry, the main write port, host, protocol filtering conditions, the same with the wirehark filter syntax;
+	2.2 "database query -> keyword" entry, write the application data segment of the regular expression, similar to the sql statement like, display characters for the ASCII or hexadecimal (same with the same wireshark)
+	2.3 installPcap.sh Please select the gb2312 encoding format in the terminal, otherwise the Chinese garbled, but does not affect the use.
+
+3. Basic functions
+"Network direct access"
+NIC input: eth0, where the name of the Linux terminal input ifconfig after the actual physical network card name, different systems are not the same.
+Regular expression: function filtering protocol, port and its combination, the specific wording with the same wirehark filtering rules.
+Only listen to the data: When you fill out the network port and the rules of the expression, click on "listen only data", the filtered data will be 500W packets as a unit, save the pcap_file folder. If you want to adjust the number of saved packages, you can modify the TCPDUMPNUM variable size in the pcap_main.py file.
+
+"Local file selection"
+First click on the "Select File", pop-up Find Files window, fill in the filter rules "* .pcap | * .p | * .cap" and select the directory, and then click the Find button, click on the list in the left select file, click "Saved "Button to save the record.
+If the file is successfully selected, in the "local file selection" of the debugging window, similar to the "selected X files, waiting for the choice of processing" words, said the successful selection of documents.
+"Clear selection" will clear the selected file, re-select.
+After selecting the file and filling in the filtering rules, click the "Filter and store to database" button.
+
+"Database query"
+First, connect the database, the initial situation is no data, but can show the header.
+"Keyword" is the user field filter, support regular expression input.
